@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {UserLogIn} from '../../shared/interfaces/interfaces';
+import {Router} from '@angular/router';
+
+import {User} from '../../shared/interfaces/interfaces';
+import {AuthService} from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -9,9 +12,13 @@ import {UserLogIn} from '../../shared/interfaces/interfaces';
 })
 export class LoginPageComponent implements OnInit {
 
+  isLoading = false;
   form: FormGroup;
 
-  constructor() { }
+  constructor(
+    private auth: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -27,7 +34,17 @@ export class LoginPageComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    const user: UserLogIn = this.form.value;
-    console.log('Form is sending...', user);
+
+    this.isLoading = true;
+    const user: User = this.form.value;
+
+    this.auth.login(user).subscribe((response) => {
+      this.form.reset();
+      console.log('login-page: ', response);
+      this.router.navigate(['/admin', 'dashboard']);
+      this.isLoading = false;
+    }, (err) => {
+      this.isLoading = false;
+    });
   }
 }

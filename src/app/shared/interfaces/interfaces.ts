@@ -1,10 +1,16 @@
-export interface PostInterface {
+export interface Interfaces {
   title: string;
   author: string;
   date: Date;
 }
 
-export interface UserLogIn {
+export interface User {
   email: string;
   password: string;
+  returnSecureToken?: boolean;
+}
+
+export interface FbAuthResponse {
+  idToken: string;
+  expiresIn: string;
 }

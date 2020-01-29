@@ -22,7 +22,7 @@
 
   <div class="enter">
     <button
-      [disabled]="form.invalid"
+      [disabled]="form.invalid || isLoading"
       type="submit"
       class="btn btn-dark"
     >Log in</button>
