@@ -31,7 +31,6 @@ export class CreatePageComponent implements OnInit {
 
     const post: Post = this.form.value;
     post.date = new Date();
-    console.log(post);
 
     this.postsService.create(post)
       .subscribe((response) => {

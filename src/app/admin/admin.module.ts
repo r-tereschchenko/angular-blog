@@ -9,7 +9,6 @@ import {CreatePageComponent} from './create-page/create-page.component';
 import {DashboardPageComponent} from './dashboard-page/dashboard-page.component';
 import {EditPageComponent} from './edit-page/edit-page.component';
 import {LoginPageComponent} from './login-page/login-page.component';
-import {AuthService} from './shared/services/auth.service';
 import {AuthGuard} from './shared/services/auth.guard';
 
 const routes = [
@@ -41,7 +40,6 @@ const routes = [
     EditPageComponent
   ],
   providers: [
-    AuthService,
     AuthGuard
   ]
 })

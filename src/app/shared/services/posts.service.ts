@@ -15,6 +15,7 @@ export class PostsService {
   constructor(private http: HttpClient) {
   }
 
+// Создаем и сохраняем пост в БД фаербейза;
   create(post: Post): Observable<Post> {
     return this.http.post(`${environment.dbUrl}/posts.json`, post)
       .pipe(
