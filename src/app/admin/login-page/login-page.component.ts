@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 
 import {User} from '../../shared/interfaces/interfaces';
 import {AuthService} from '../shared/services/auth.service';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-login-page',
@@ -12,15 +13,23 @@ import {AuthService} from '../shared/services/auth.service';
 })
 export class LoginPageComponent implements OnInit {
 
+  params: string;
   isLoading = false;
   form: FormGroup;
 
   constructor(
-    private auth: AuthService,
-    private router: Router
+    public auth: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe((params: Params) => {
+      if (params['loginAgain']) {
+        this.params = 'Please, log in again. Your token has been expired';
+      }
+    });
+
     this.form = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [
@@ -44,7 +53,9 @@ export class LoginPageComponent implements OnInit {
       this.router.navigate(['/admin', 'dashboard']);
       this.isLoading = false;
     }, (err) => {
+      this.params = '';
       this.isLoading = false;
+      console.log('From login-page: ', err);
     });
   }
 }

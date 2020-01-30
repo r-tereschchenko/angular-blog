@@ -2,6 +2,7 @@
   height: fit-content;
   display: flex;
   align-self: center;
+  position: relative;
   margin: 0 auto;
 }
 form {
@@ -18,4 +19,15 @@ form {
   }
 }
 
+.errors {
+  position: absolute;
+  bottom: 105%;
+  left: 0;
+}
 
+.warning {
+  padding: 5px;
+  font-size: 0.7rem;
+  border: 1px solid red;
+  color: red;
+}
