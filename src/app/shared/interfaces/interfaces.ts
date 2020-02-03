@@ -1,9 +1,3 @@
-export interface Interfaces {
-  title: string;
-  author: string;
-  date: Date;
-}
-
 export interface User {
   email: string;
   password: string;

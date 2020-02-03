@@ -1,38 +1,24 @@
-<div class="post">
-  <div class="header">
-    <h1>Post title</h1>
+<div *ngIf="post$ | async as post; else loader">
+  <div class="post">
+    <div class="header">
+      <h1>{{ post.title }}</h1>
 
-    <button
-      class=" btn btn-link"
-      routerLink="/">To main</button>
-  </div>
+      <button
+        class=" btn btn-link"
+        routerLink="/">To main</button>
+    </div>
 
-  <div class="info">
-    <strong>Author</strong>
-    <small>29.01.2020</small>
-  </div>
+    <div class="info">
+      <strong>{{ post.author }}</strong>
+      <small>{{ post.date | date: 'medium': null:'ru' }}</small>
+    </div>
 
-  <div class="content">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores qui quia veritatis! Ad itaque praesentium
-      voluptate. Asperiores debitis incidunt nostrum pariatur ratione. Ad aliquid cum dolor illum non obcaecati
-      sapiente?
-    </p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores qui quia veritatis! Ad itaque praesentium
-      voluptate. Asperiores debitis incidunt nostrum pariatur ratione. Ad aliquid cum dolor illum non obcaecati
-      sapiente?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores qui quia veritatis! Ad itaque praesentium
-      voluptate.
-    </p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores qui quia veritatis! Ad itaque praesentium
-      voluptate. Asperiores debitis incidunt nostrum pariatur ratione. Ad aliquid cum dolor illum non obcaecati
-      sapiente?adipisicing elit. Asperiores qui quia veritatis!
-    </p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores qui quia veritatis! Ad itaque praesentium
-      voluptate. Asperiores debitis incidunt nostrum pariatur ratione. Ad aliquid cum dolor illum non obcaecati
-      sapiente?adipisicing elit. Asperiores qui quia veritatis! adipisicing elit. Asperiores qui quia veritatis!
-    </p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores qui quia veritatis! Ad itaque praesentium
-      voluptate. Asperiores debitis incidunt nostrum pariatur ratione. Ad aliquid cum dolor illum non obcaecati
-      sapiente?
-    </p>
+    <div class="content">
+      <quill-view-html [content]="post.text"></quill-view-html>
+    </div>
   </div>
 </div>
+
+<ng-template #loader>
+  <h1 class="text-center">Loading...</h1>
+</ng-template>
