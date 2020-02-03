@@ -4,7 +4,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 
 import {User} from '../../shared/interfaces/interfaces';
 import {AuthService} from '../shared/services/auth.service';
-import {Subject} from 'rxjs';
+import {AlertService} from '../shared/services/alert.service';
 
 @Component({
   selector: 'app-login-page',
@@ -20,7 +20,8 @@ export class LoginPageComponent implements OnInit {
   constructor(
     public auth: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alert: AlertService
   ) { }
 
   ngOnInit() {
@@ -51,12 +52,12 @@ export class LoginPageComponent implements OnInit {
 
     this.auth.login(user).subscribe((response) => {
       this.form.reset();
-      console.log('login-page: ', response);
       this.router.navigate(['/admin', 'dashboard']);
       this.isLoading = false;
     }, (err) => {
       this.params = '';
       this.isLoading = false;
+      this.alert.danger('Log in failed');
       console.log('From login-page: ', err);
     });
   }

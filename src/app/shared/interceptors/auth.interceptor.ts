@@ -33,9 +33,6 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(req)
       // Обрабатваем ошибки; Если будут ошибки с бекенда, мы их перехвачиваем
       .pipe(
-        tap(() => {
-          console.log('Interceptor');
-        }),
         catchError((error: HttpErrorResponse) => {
           // throwError() делает из обьекта ошибки - observable
           console.log('[Interceptor Error]:', error);
