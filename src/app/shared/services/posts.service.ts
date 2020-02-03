@@ -15,6 +15,20 @@ export class PostsService {
   constructor(private http: HttpClient) {
   }
 
+  getAllPosts(): Observable<Post[]> {
+    return this.http.get(`${environment.dbUrl}/posts.json`)
+      .pipe(
+        map((response: {[key: string]: any}) => {
+          return Object.keys(response)
+            .map(key => ({
+              ...response[key],
+              id: key,
+              date: new Date(response[key].date)
+            }));
+        })
+      )
+  }
+
 // Создаем и сохраняем пост в БД фаербейза;
   create(post: Post): Observable<Post> {
     return this.http.post(`${environment.dbUrl}/posts.json`, post)
@@ -27,5 +41,26 @@ export class PostsService {
           };
         })
       );
+  }
+
+  getById(id: string): Observable<Post> {
+    return this.http.get<Post>(`${environment.dbUrl}/posts/${id}.json`)
+      .pipe(
+        map((post: Post) => {
+          return {
+            ...post,
+            id,
+            date: new Date(post.date)
+          };
+        })
+      );
+  }
+
+  update(post: Post): Observable<Post> {
+    return this.http.patch<Post>(`${environment.dbUrl}/posts/${post.id}.json`, post)
+  }
+
+  remove(id: string): Observable<void> {
+    return this.http.delete<void>(`${environment.dbUrl}/posts/${id}.json`)
   }
 }

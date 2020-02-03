@@ -10,6 +10,7 @@ import {DashboardPageComponent} from './dashboard-page/dashboard-page.component'
 import {EditPageComponent} from './edit-page/edit-page.component';
 import {LoginPageComponent} from './login-page/login-page.component';
 import {AuthGuard} from './shared/services/auth.guard';
+import {SearchPipe} from './shared/search.pipe';
 
 const routes = [
   {
@@ -37,7 +38,8 @@ const routes = [
     LoginPageComponent,
     DashboardPageComponent,
     CreatePageComponent,
-    EditPageComponent
+    EditPageComponent,
+    SearchPipe
   ],
   providers: [
     AuthGuard
