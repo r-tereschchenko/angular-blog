@@ -1,12 +1,17 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 
-import {AlertService} from '../../services/alert.service';
 import {Subscription} from 'rxjs';
+
+import {AlertService} from '../../services/alert.service';
+import {popLeft} from '../../animations';
 
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',
-  styleUrls: ['./alert.component.scss']
+  styleUrls: ['./alert.component.scss'],
+  animations: [
+    popLeft
+  ]
 })
 export class AlertComponent implements OnInit, OnDestroy {
 
@@ -25,7 +30,6 @@ export class AlertComponent implements OnInit, OnDestroy {
     this.alertSub = this.alertService.alert$.subscribe(alert => {
       this.text = alert.text;
       this.type = alert.type;
-
 
       const timeout = setTimeout(() => {
         clearTimeout(timeout);

@@ -5,17 +5,24 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {User} from '../../shared/interfaces/interfaces';
 import {AuthService} from '../shared/services/auth.service';
 import {AlertService} from '../shared/services/alert.service';
+import {popLeft} from '../shared/animations';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  styleUrls: ['./login-page.component.scss'],
+  animations: [
+    popLeft
+  ]
 })
 export class LoginPageComponent implements OnInit {
 
   params: string;
   isLoading = false;
   form: FormGroup;
+
+  // Animation state
+  position = '';
 
   constructor(
     public auth: AuthService,

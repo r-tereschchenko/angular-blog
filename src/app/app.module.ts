@@ -2,6 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule, Provider} from '@angular/core';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {registerLocaleData} from '@angular/common';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import localeRU from '@angular/common/locales/ru';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -12,6 +13,7 @@ import {PostPageComponent} from './post-page/post-page.component';
 import {PostComponent} from './shared/components/post/post.component';
 import {SharedModule} from './shared/shared.module';
 import {AuthInterceptor} from './shared/interceptors/auth.interceptor';
+import { AnimationComponent } from './animation/animation.component';
 
 registerLocaleData(localeRU, 'ru');
 
@@ -28,9 +30,11 @@ const INTERCEPTOR_PROVIDER: Provider = {
     MainLayoutComponent,
     HomePageComponent,
     PostPageComponent,
-    PostComponent
+    PostComponent,
+    AnimationComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     SharedModule
